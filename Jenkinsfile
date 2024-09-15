@@ -2,6 +2,7 @@ pipeline {
 	agent any
 	tools {
 		nodejs 'NodeJS'
+		docker 'Docker'
 	}
 	stages {
 		stage('Checkout Github'){
@@ -17,6 +18,11 @@ pipeline {
 		stage('Test Code'){
 			steps {
 				sh 'npm test'
+			}
+		}
+		stage('Build Docker Image'){
+			steps {
+				sh 'docker.build("nodeimage"+"$BUILD_NUMBER")'	
 			}
 		}
 	}
