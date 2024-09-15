@@ -4,6 +4,10 @@ pipeline {
 		nodejs 'NodeJS'
 		//docker 'Docker'
 	}
+	environment {
+		DOCKER_CREDENTIALS_ID = 'dockerhub-cred'
+		DOCKER_REGISTRY = 'https://hub.docker.com/u/iquantc'
+	}
 	stages {
 		stage('Checkout Github'){
 			steps {
@@ -25,6 +29,15 @@ pipeline {
 				script {
 					docker.build("nodeimage"+"$BUILD_NUMBER")
 				}	
+			}
+		}
+		stage('Push Image to DockerHub'){
+			steps {
+				script {
+					withDockerRegistry(credentialsId: 'dockerhub-cred', toolName: 'Docker', url: 'DOCKER_REGISTRY') {
+    						docker.image.push([latest])
+					}
+				}
 			}
 		}
 	}
