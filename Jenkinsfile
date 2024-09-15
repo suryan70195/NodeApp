@@ -2,6 +2,7 @@ pipeline {
 	agent any
 	tools {
 		nodejs 'NodeJS'
+		docker 'Docker'
 	}
 	stages {
 		stage('Checkout Github'){
