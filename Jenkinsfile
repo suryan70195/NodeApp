@@ -12,7 +12,7 @@ pipeline {
 
 			}
 		}
-		stage('Tests'){
+		stage('Test Code'){
 			steps {
 
 			}
