@@ -23,8 +23,17 @@ pipeline {
 		stage('Build Docker Image'){
 			steps {
 				script {
-					docker.build("nodeimage"+"$BUILD_NUMBER")
+					def image = docker.build("nodeimage"+"$BUILD_NUMBER")
 				}	
+			}
+		}
+		stage('Push Image to DockerHub'){
+			steps {
+				script {
+					withDockerRegistry(credentialsId: 'dockerhub-jenkins-token') {
+    						image.push('latest')
+					}
+				}
 			}
 		}
 	}
