@@ -30,8 +30,11 @@ pipeline {
 		stage('Push Image to Dockerhub'){
 			steps {
 				script {
-					withDockerRegistry(credentialsId: 'dockerhub-jenkins-token') {
-						docker.image.push(['latest'])
+					//withDockerRegistry(credentialsId: 'dockerhub-jenkins-token') {
+					//	docker.image.push(['latest'])
+					withDockerRegistry(credentialsId: 'dockerhub-jenkins-token', toolName: 'Docker') {
+						docker.image.push('latest')
+						}
 					}
 				}
 			}
