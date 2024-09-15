@@ -2,7 +2,6 @@ pipeline {
 	agent any
 	tools {
 		nodejs 'NodeJS'
-		//docker 'Docker'
 	}
 	stages {
 		stage('Checkout Github'){
@@ -18,22 +17,6 @@ pipeline {
 		stage('Test Code'){
 			steps {
 				sh 'npm test'
-			}
-		}
-		stage('Build Docker Image'){
-			steps {
-				script {
-					def image = docker.build("nodeimage"+"$BUILD_NUMBER")
-				}	
-			}
-		}
-		stage('Push Image to DockerHub'){
-			steps {
-				script {
-					withDockerRegistry(credentialsId: 'dockerhub-jenkins-token') {
-    						image.push('latest')
-					}
-				}
 			}
 		}
 	}
