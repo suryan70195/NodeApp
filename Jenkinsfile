@@ -27,6 +27,15 @@ pipeline {
 				}	
 			}
 		}
+		stage('Push Image to Dockerhub'){
+			steps {
+				script {
+					withDockerRegistry(credentialsId: 'dockerhub-jenkins-token') {
+						docker.image.push(['latest'])
+					}
+				}
+			}
+		}
 	}
 
 	post {
