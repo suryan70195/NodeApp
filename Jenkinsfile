@@ -4,7 +4,7 @@ pipeline {
 		nodejs 'NodeJS'
 	}
 	environment {
-		DOCKER_HUB_REPO = 'iquantc/dockerImage'
+		DOCKER_HUB_REPO = 'iquantc/iquant-apps'
 		DOCKER_HUB_CREDENTIALS = 'dockerhub-jenkins-token'
 	}
 	stages {
