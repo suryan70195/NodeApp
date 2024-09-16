@@ -3,6 +3,10 @@ pipeline {
 	tools {
 		nodejs 'NodeJS'
 	}
+	environment {
+		DOCKER_HUB_REPO = 'https://hub.docker.com/iquantc'
+		DOCKER_HUB_CREDENTIALS = 'dockerhub-jenkins-token'
+	}
 	stages {
 		stage('Checkout Github'){
 			steps {
@@ -22,7 +26,16 @@ pipeline {
 		stage('Build Docker Image'){
 			steps {
 				script {
-					docker.build("nodeimage"+"$BUILD_NUMBER")
+					dockerImage = docker.build("nodeimage"+"${BUILD_NUMBER}")
+				}
+			}
+		}
+		stage('Push Image to DockerHub'){
+			steps {
+				script {
+					docker.withRegistry('https://registry.hub.docker.com', "${DOCKER_HUB_CREDENTIALS}"){
+						dockerImage.push('latest')
+					}
 				}
 			}
 		}
