@@ -1,5 +1,5 @@
-# Use an official alpine nodeJS image as the base image
-FROM node:alpine
+# Use an official nodeJS image as the base image
+FROM node:latest
 
 # Set working directory in the container
 WORKDIR /app
@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy package.json and package-lock.json to the container
 COPY package*.json ./
 
-# Install only production nodeJS dependencies in Docker Image
-RUN npm install --only=production
+# Install nodeJS dependencies
+RUN npm install
 
 # Copy the rest of the application code into the container
 COPY . .
