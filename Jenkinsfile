@@ -4,7 +4,7 @@ pipeline {
 		nodejs 'NodeJS'
 	}
 	environment {
-		DOCKER_CREDENTIALS_ID = 'dockerhub-jenkins-token'
+		DOCKER_HUB_CREDENTIALS_ID = 'dockerhub-jenkins-token'
 		DOCKER_REGISTRY = 'https://hub.docker.com/u/iquantc'
 		DOCKER_HUB_REPO = 'iquantc/iquant-app'
 	}
