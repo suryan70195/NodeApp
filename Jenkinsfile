@@ -39,14 +39,22 @@ pipeline {
 				}
 			}
 		}
+		stage('Deploy to Kubernetes'){
+			steps {
+				withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+					sh 'kubectl apply -f deployment.yaml'
+					sh 'kubectl apply -f service.yaml'
+				}
+			}
+		}
 	}
 
 	post {
 		success {
-			echo 'Build completed succesfully!'
+			echo 'Build&Deploy completed succesfully!'
 		}
 		failure {
-			echo 'Build failed. Check logs.'
+			echo 'Build&Deploy failed. Check logs.'
 		}
 	}
 }
