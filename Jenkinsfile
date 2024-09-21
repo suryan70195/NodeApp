@@ -51,7 +51,7 @@ pipeline {
 		stage('Get Pods'){
 			steps {
 				withEnv(["KUBECONFIG=/home/iquant/.kube"]){
-					sh 'kubectl get pods'
+					sh './kubectl get pods'
 				}
 			}
 		}
