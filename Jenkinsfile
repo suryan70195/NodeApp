@@ -30,6 +30,11 @@ pipeline {
 				}
 			}
 		}
+		stage('Trivy Scan'){
+			steps {
+				sh 'trivy dockerImage'
+			}
+		}
 		stage('Push Image to DockerHub'){
 			steps {
 				script {
