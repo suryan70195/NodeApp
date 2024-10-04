@@ -32,7 +32,7 @@ pipeline {
 		}
 		stage('Trivy Scan'){
 			steps {
-				sh 'trivy dockerImage'
+				sh 'trivy ${DOCKER_HUB_REPO}:latest'
 			}
 		}
 		stage('Push Image to DockerHub'){
