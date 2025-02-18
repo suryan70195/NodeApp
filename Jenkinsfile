@@ -30,15 +30,8 @@ pipeline {
 				   docker.build("nodeimage"+"BUILD_NUMBER")
              			}
 			}
-		}
-		stage('Push Image to DockerHub'){
-			steps {
-				script {
-					docker.withRegistry('https://registry.hub.docker.com', "${DOCKER_HUB_CREDENTIALS_ID}"){
-						dockerImage.push('latest')
-					}
-				}
-			}
-		}
+		  }
+
+	    }
 	}	
 }
